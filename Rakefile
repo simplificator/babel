@@ -5,10 +5,10 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "babel"
-    gem.summary = %Q{TODO}
-    gem.email = "pascal.betz@simplificator.com"
-    gem.homepage = "http://github.com/pascalbetz/babel"
-    gem.authors = ["pascalbetz"]
+    gem.summary = %Q{Utility to guess the language of a text}
+    gem.email = "info@simplificator.com"
+    gem.homepage = "http://github.com/simplificator/babel"
+    gem.authors = ["simplificator"]
 
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end

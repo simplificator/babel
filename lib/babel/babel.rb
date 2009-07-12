@@ -1,9 +1,8 @@
-require 'yaml'
 module Babel
-  @profiles = {}
-  GUESS_DISTANCE_TRESHOLD = 60
-  
   MAX_DISTANCE_PER_NGRAM = 3
+
+  @profiles = {}
+  
   DEFAULT_FILE_NAME = 'babel_profile.yml'
   
   PROFILE_DIR = File.join(File.dirname(__FILE__), '..', 'profiles')
@@ -12,23 +11,34 @@ module Babel
   def self.learn(lang, text, options = {})
     lang = lang.to_s
     options = {:min_length => 2, :max_length => 5}.merge(options)
-    @profiles[lang.to_s] ||= Hash.new(0)
+    @profiles[lang.to_s] ||= {}
     existing = @profiles[lang.to_s]
     profile = Babel.build_profile(text, options)
     profile.each do |key, value|
-      existing[key] += value
+      existing[key] ||= [0, nil]
+      existing[key][0] = existing[key][0] + value[0]
     end
+    Babel.rank(existing)
     existing
   end
   
   
 
-  
+  def self.rank(profile)
+    profile.values.sort() {|o2, o1| o1.first <=> o2.first}.each_with_index do |item, index|
+      item[1] = index + 1
+    end
+  end
   
   def self.distance(source, target) 
     distance = 0
     source.each do |key, value|
-      distance += [((target[key] || 0) - value).abs, MAX_DISTANCE_PER_NGRAM].min
+      target_value = target[key]
+      if target_value
+        distance += [(target_value.first - value.first).abs, MAX_DISTANCE_PER_NGRAM].min
+      else
+        distance += MAX_DISTANCE_PER_NGRAM
+      end
     end 
     distance
   end
@@ -39,7 +49,7 @@ module Babel
     Babel.distances(source).each do |entry|
       found = entry if found.nil? || entry.last < found.last
     end
-    found.first if found && found.last <= (options[:treshold] || GUESS_DISTANCE_TRESHOLD)
+    found.first if found# && found.last <= (options[:treshold] || GUESS_DISTANCE_TRESHOLD)
   end
   
   # An array of arrays of [language, distance] arrays
@@ -47,6 +57,38 @@ module Babel
     source = Babel.build_profile(source)
     @profiles.map { |lang, target| [lang, Babel.distance(source, target)] }
   end
+
+  
+  # Build the profile of a piece of text
+  def self.build_profile(text, options = {})
+    return text if text.is_a?(Hash)
+    #text = Babel.clean_text(text)
+    profile = {}
+    text.split(' ').each do |word|
+      ngrams = word.ngrams(options)
+      ngrams.each do |ngram|
+        profile[ngram] ||= [0, nil]
+        profile[ngram][0] = profile[ngram][0] + 1
+      end
+    end
+    profile
+  end
+  
+  
+  def self.file_name(lang)
+    File.join(PROFILE_DIR, "profile_#{lang}.yml")
+  end
+  
+  # remove some punctuation
+  def self.clean_text(text)
+    text.gsub!('.', '')
+    text.gsub!(';', '')
+    text.gsub!(',', '')
+    text.gsub!('\'', '')
+    text.gsub!('"', '')
+    text
+  end
+  
   
   # Load a specific profile ()
   def self.load_profile(lang = nil)
@@ -75,26 +117,6 @@ module Babel
         YAML.dump(@profiles[lang], file)
       end
     end
-  end
-  
-  
-  private
-  # Build the profile of a piece of text
-  def self.build_profile(text, options = {})
-    return text if text.is_a?(Hash)
-    profile = Hash.new(0)
-    text.split(' ').each do |word|
-      ngrams = word.ngrams(options)
-      ngrams.each do |ngram|
-        profile[ngram] += 1
-      end
-    end
-    profile
-  end
-  
-  
-  def self.file_name(lang)
-    File.join(PROFILE_DIR, "profile_#{lang}.yml")
   end
 end
 

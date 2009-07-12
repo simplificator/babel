@@ -1,51 +1,151 @@
 --- 
-ny: 1
-und: 1
-nd: 1
-nda: 1
-noon: 1
-oo: 1
-ainy: 1
-sun: 1
-fte: 1
-ter: 1
-ern: 1
-"no": 1
-rain: 1
-su: 1
-sund: 1
-sunda: 1
-unda: 1
-ay: 1
-er: 1
-un: 1
-unday: 1
-nday: 1
-ft: 1
-ernoo: 1
-noo: 1
-oon: 1
-ra: 1
-rai: 1
-aft: 1
-afte: 1
-after: 1
-tern: 1
-terno: 1
-rainy: 1
-in: 1
-af: 1
-erno: 1
-ain: 1
-day: 1
-te: 1
-rn: 1
-da: 1
-ai: 1
-rno: 1
-iny: 1
-fter: 1
-rnoon: 1
-"on": 1
-ftern: 1
-rnoo: 1
+ny: 
+- 1
+- 1
+und: 
+- 1
+- 2
+nd: 
+- 1
+- 3
+nda: 
+- 1
+- 4
+noon: 
+- 1
+- 5
+oo: 
+- 1
+- 6
+ainy: 
+- 1
+- 7
+sun: 
+- 1
+- 8
+fte: 
+- 1
+- 9
+ter: 
+- 1
+- 10
+ern: 
+- 1
+- 11
+"no": 
+- 1
+- 12
+rain: 
+- 1
+- 13
+su: 
+- 1
+- 14
+sund: 
+- 1
+- 15
+sunda: 
+- 1
+- 16
+unda: 
+- 1
+- 17
+ay: 
+- 1
+- 18
+er: 
+- 1
+- 19
+un: 
+- 1
+- 20
+unday: 
+- 1
+- 21
+nday: 
+- 1
+- 22
+ft: 
+- 1
+- 23
+ernoo: 
+- 1
+- 24
+noo: 
+- 1
+- 25
+oon: 
+- 1
+- 26
+ra: 
+- 1
+- 27
+rai: 
+- 1
+- 28
+aft: 
+- 1
+- 29
+afte: 
+- 1
+- 30
+after: 
+- 1
+- 31
+tern: 
+- 1
+- 32
+terno: 
+- 1
+- 33
+rainy: 
+- 1
+- 34
+in: 
+- 1
+- 35
+af: 
+- 1
+- 36
+erno: 
+- 1
+- 37
+ain: 
+- 1
+- 38
+day: 
+- 1
+- 39
+te: 
+- 1
+- 40
+rn: 
+- 1
+- 41
+da: 
+- 1
+- 42
+ai: 
+- 1
+- 43
+rno: 
+- 1
+- 44
+iny: 
+- 1
+- 45
+fter: 
+- 1
+- 46
+rnoon: 
+- 1
+- 47
+"on": 
+- 1
+- 48
+ftern: 
+- 1
+- 49
+rnoo: 
+- 1
+- 50

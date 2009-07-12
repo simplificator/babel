@@ -1,56 +1,166 @@
 --- 
-risc: 1
-che: 1
-nn: 1
-egn: 1
-gneri: 1
-ne: 1
-ri: 1
-ntag: 1
-eg: 1
-gner: 1
-er: 2
-sch: 1
-sche: 1
-nnta: 1
-ta: 1
-neri: 1
-eris: 1
-erisc: 1
-risch: 1
-isc: 1
-regne: 1
-ische: 1
-onn: 1
-tag: 1
-egne: 1
-egner: 1
-ner: 1
-sc: 1
-ch: 1
-nta: 1
-eri: 1
-ris: 1
-isch: 1
-so: 1
-sonn: 1
-sonnt: 1
-nntag: 1
-nt: 1
-ag: 1
-gn: 1
-scher: 1
-cher: 1
-he: 1
-son: 1
-onnt: 1
-re: 1
-regn: 1
-gne: 1
-onnta: 1
-reg: 1
-neris: 1
-"on": 1
-nnt: 1
-is: 1
-her: 1
+risc: 
+- 1
+- 11
+che: 
+- 1
+- 28
+nn: 
+- 1
+- 3
+egn: 
+- 1
+- 4
+gneri: 
+- 1
+- 5
+ne: 
+- 1
+- 6
+ri: 
+- 1
+- 7
+ntag: 
+- 1
+- 8
+eg: 
+- 1
+- 9
+gner: 
+- 1
+- 10
+er: 
+- 2
+- 1
+sch: 
+- 1
+- 12
+sche: 
+- 1
+- 13
+nnta: 
+- 1
+- 14
+ta: 
+- 1
+- 15
+neri: 
+- 1
+- 16
+eris: 
+- 1
+- 17
+erisc: 
+- 1
+- 18
+risch: 
+- 1
+- 19
+isc: 
+- 1
+- 20
+regne: 
+- 1
+- 21
+ische: 
+- 1
+- 22
+onn: 
+- 1
+- 23
+tag: 
+- 1
+- 24
+egne: 
+- 1
+- 25
+egner: 
+- 1
+- 26
+ner: 
+- 1
+- 27
+sc: 
+- 1
+- 2
+ch: 
+- 1
+- 29
+nta: 
+- 1
+- 30
+eri: 
+- 1
+- 31
+ris: 
+- 1
+- 32
+isch: 
+- 1
+- 33
+so: 
+- 1
+- 34
+sonn: 
+- 1
+- 35
+sonnt: 
+- 1
+- 36
+nntag: 
+- 1
+- 37
+nt: 
+- 1
+- 38
+ag: 
+- 1
+- 39
+gn: 
+- 1
+- 40
+scher: 
+- 1
+- 41
+cher: 
+- 1
+- 42
+he: 
+- 1
+- 43
+son: 
+- 1
+- 44
+onnt: 
+- 1
+- 45
+re: 
+- 1
+- 46
+regn: 
+- 1
+- 47
+gne: 
+- 1
+- 48
+onnta: 
+- 1
+- 49
+reg: 
+- 1
+- 50
+neris: 
+- 1
+- 51
+"on": 
+- 1
+- 52
+nnt: 
+- 1
+- 53
+is: 
+- 1
+- 54
+her: 
+- 1
+- 55

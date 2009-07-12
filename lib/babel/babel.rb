@@ -1,12 +1,16 @@
 require 'yaml'
 module Babel
   @profiles = {}
-  GUESS_DISTANCE_TRESHOLD = 35
+  GUESS_DISTANCE_TRESHOLD = 60
   
   MAX_DISTANCE_PER_NGRAM = 3
   DEFAULT_FILE_NAME = 'babel_profile.yml'
+  
+  PROFILE_DIR = File.join(File.dirname(__FILE__), '..', 'profiles')
+  
   # "learn". build profile and memorize
   def self.learn(lang, text, options = {})
+    lang = lang.to_s
     options = {:min_length => 2, :max_length => 5}.merge(options)
     @profiles[lang.to_s] ||= Hash.new(0)
     existing = @profiles[lang.to_s]
@@ -23,8 +27,8 @@ module Babel
   
   def self.distance(source, target) 
     distance = 0
-    target.each do |key, value|
-      distance += [(source[key] - value).abs, MAX_DISTANCE_PER_NGRAM].min
+    source.each do |key, value|
+      distance += [((target[key] || 0) - value).abs, MAX_DISTANCE_PER_NGRAM].min
     end 
     distance
   end
@@ -44,16 +48,36 @@ module Babel
     @profiles.map { |lang, target| [lang, Babel.distance(source, target)] }
   end
   
-  def self.load_profiles(name = DEFAULT_FILE_NAME)
-    @profiles = YAML.load_file(file_name(name))
-    puts "Loadong from #{__FILE__}"
+  # Load a specific profile ()
+  def self.load_profile(lang = nil)
+    if lang.nil?
+      Dir[File.join(PROFILE_DIR, '*.yml')].each do |file|
+        lang =File.basename(file)[-6..-5]
+        @profiles[lang] = YAML.load_file(file)
+      end
+    else  
+      lang = lang.to_s
+      @profiles[lang] = YAML.load_file(file_name(lang))
+    end
+    
   end
   
-  def self.save_profiles(name = DEFAULT_FILE_NAME)
-    File.open(file_name(name), 'wb') do |file|
-      YAML.dump(@profiles, file)
+  def self.save_profile(lang = nil)
+    if lang.nil?
+      @profiles.each do |lang, profile|
+        File.open(file_name(lang), 'wb') do |file|
+          YAML.dump(profile, file)
+        end
+      end
+    else
+      lang = lang.to_s
+      File.open(file_name(lang), 'wb') do |file|
+        YAML.dump(@profiles[lang], file)
+      end
     end
   end
+  
+  
   private
   # Build the profile of a piece of text
   def self.build_profile(text, options = {})
@@ -69,8 +93,8 @@ module Babel
   end
   
   
-  def self.file_name(name)
-    name == DEFAULT_FILE_NAME ? File.dirname(__FILE__) + "/../#{DEFAULT_FILE_NAME}" : name
+  def self.file_name(lang)
+    File.join(PROFILE_DIR, "profile_#{lang}.yml")
   end
 end
 

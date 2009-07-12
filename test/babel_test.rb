@@ -8,14 +8,13 @@ class BabelTest < Test::Unit::TestCase
     de = 'Regnerischer Sonntag'
     fr = 'Je ne regrette rien'
     
+    Babel.load_profile
     #en.language = 'en'
-    #en.language = 'de'
-    #en.language = 'fr'
-    Babel.load_profiles
+    #de.language = 'de'
+    #fr.language = 'fr'
     puts en.language
     puts de.language
-    puts fr.language(:treshold => 25)
-    puts Babel.distances(fr).inspect
-    Babel.save_profiles
+    puts fr.language
+    #Babel.save_profile
   end
 end

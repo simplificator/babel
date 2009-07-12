@@ -24,7 +24,7 @@ module Babel
   def self.distance(source, target) 
     distance = 0
     target.each do |key, value|
-      distance += (source[key] - value).abs.at_most(MAX_DISTANCE_PER_NGRAM)
+      distance += [(source[key] - value).abs, MAX_DISTANCE_PER_NGRAM].min
     end 
     distance
   end

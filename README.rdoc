@@ -1,0 +1,7 @@
+= babel
+
+Description goes here.
+
+== Copyright
+
+Copyright (c) 2009 pascalbetz. See LICENSE for details.

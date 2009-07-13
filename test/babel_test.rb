@@ -7,4 +7,7 @@ class BabelTest < Test::Unit::TestCase
    fail
   end
   
+  should 'not choke when registering the first' do
+  end
+  
 end

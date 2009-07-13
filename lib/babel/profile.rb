@@ -5,15 +5,16 @@ module Babel
       @total_occurences = 0
     end
     
+    #
     def learn(text, options = {})
       options = {:min_length => 2, :max_length => 5, :pad => true}.merge(options)
       text = clean(text)
       text.split(' ').each do |word|
-        ngrams = word.ngrams(options)
-        ngrams.each do |ngram|
+        word.n_grams(options).each do |ngram|
           self.occured(ngram)
         end
       end
+      # after learning rank the new n-grams
       self.rank
       self # return self so we can chain learn commans. profile.learn('asasas').learn('asdsad')
     end
@@ -33,9 +34,9 @@ module Babel
       text = text.gsub('+', '')
       text
     end
+    
     # limit this profile to n items
     # profile needs to be ranked first
-    # do not use this if you plan to extend the profile later on
     def limit(boundary = 100)
       @profile.reject! do |key, value|
         raise 'Please call rank() first' if value.last == 0

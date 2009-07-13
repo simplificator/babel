@@ -10,6 +10,7 @@ begin
     gem.homepage = "http://github.com/simplificator/babel"
     gem.authors = ["simplificator"]
     gem.add_dependency('ya2yaml', '>= 0.2.6')
+    gem.files.exclude= ['lib/data/*.txt', 'lib/data/*.xml']
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError

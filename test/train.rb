@@ -4,10 +4,10 @@ class TrainTest < Test::Unit::TestCase
   
   
   should 'Build the profiles' do
-   Dir[File.dirname(__FILE__) + '/../lib/data/udhr_txt/*.txt'].each do |name|
+   Dir[File.dirname(__FILE__) + '/../lib/data/*.txt'].each do |name|
      File.basename(name) =~ /udhr\_(.+)\.txt/
-     if ['eng', 'fra', 'deu_1996', 'spa'].include?($1)
-     #if ['spa'].include?($1)
+     #if ['eng', 'fra', 'deu', 'spa', 'ita'].include?($1)
+     if ['deu'].include?($1)
      puts "Learning '#{$1}'"
      File.open(name, 'r') do |file|
        file.each_with_index do |line, index|

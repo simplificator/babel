@@ -7,26 +7,20 @@ class BabelTest < Test::Unit::TestCase
     en = "Rainy sunday afternoon next week on monday."
     de = 'Regnerischer Sonntag. Ich werde essen gehen'
     fr = 'Je ne regrette rien'
-    
-    en1 = "It won't be long"
-    de1 = "Tief im westen"
-    fr1 = 'Allez les bleu'
-    
+    sp = 'Yo no soy un marinero'
     
     Babel.load_profiles
 
     foo en
     foo de
     foo fr
-    foo "rainy afternoon"
+    foo sp
     
     bar en
     bar de
     bar fr
+    bar sp
     
-    #puts Babel.distances("why so sad").inspect
-    #puts Babel.distances(de).inspect
-    #puts Babel.distances(fr).inspect
 #    Babel.save_profiles()
   end
   

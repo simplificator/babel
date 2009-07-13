@@ -1,0 +1,9 @@
+Universal Declaration of Human Rights - Urdu
+© 1996 – 2009 The Office of the High Commissioner for Human Rights
+This plain text version prepared by the “UDHR in Unicode”
+project, http://www.unicode.org/udhr.
+---
+
+[??]
+      [??]
+تمام انسان آزاد اور حقوق و عزت کے اعتبار سے برابر پیدا ہوۓ ہیں۔ انہیں ضمیر اور عقل ودیعت ہوئی ہے۔ اسلیۓ انہیں ایک دوسرے کے ساتھ بھائی چارے کا سلوک کرنا چاہیۓ۔

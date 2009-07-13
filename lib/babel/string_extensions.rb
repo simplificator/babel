@@ -1,4 +1,6 @@
 class String 
+  
+  # TODO: recursive?
   def ngrams(options = {})
     min_length = options[:min_length] || 1
     max_length = options[:max_length] || self.length

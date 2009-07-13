@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{babel}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["simplificator"]
@@ -19,9 +19,15 @@ Gem::Specification.new do |s|
     "VERSION.yml",
     "lib/babel.rb",
     "lib/babel/babel.rb",
+    "lib/babel/profile.rb",
     "lib/babel/string_extensions.rb",
-    "lib/babel_profile.yml",
+    "lib/data/de.txt",
+    "lib/data/en.txt",
+    "lib/profiles/profile_de.yml",
+    "lib/profiles/profile_en.yml",
+    "lib/profiles/profile_fr.yml",
     "test/babel_test.rb",
+    "test/profile_test.rb",
     "test/string_extensions_test.rb",
     "test/test_helper.rb"
   ]
@@ -33,6 +39,7 @@ Gem::Specification.new do |s|
   s.summary = %q{Utility to guess the language of a text}
   s.test_files = [
     "test/babel_test.rb",
+    "test/profile_test.rb",
     "test/string_extensions_test.rb",
     "test/test_helper.rb"
   ]
@@ -42,8 +49,11 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<ya2yaml>, [">= 0.2.6"])
     else
+      s.add_dependency(%q<ya2yaml>, [">= 0.2.6"])
     end
   else
+    s.add_dependency(%q<ya2yaml>, [">= 0.2.6"])
   end
 end

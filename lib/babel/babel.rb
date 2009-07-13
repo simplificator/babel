@@ -19,6 +19,10 @@ module Babel
     @profiles = {}
   end
   
+  def self.profile(lang)
+    @profiles[lang]
+  end
+  
   # Guess the language of a text.
   # As soon as there is at least one profile, this method always
   # returns a value (perhaps the wrong) one... 
@@ -71,15 +75,21 @@ module Babel
   #  * :dir the directory, defaults to Babel::PROFILE_DIR
   #  * :limit if specified, then the profile is limited to that many entries before it is saved 
   def self.save_profiles(options = {})
-    dir = options[:directory] || PROFILE_DIR
     @profiles.each do |lang, profile|
-      profile.limit(options[:limit]) if options.has_key?(:limit)
-      File.open(file_name(dir, lang), 'wb') do |file|
-        file.write(profile.ya2yaml)
-      end
+      Babel.save_profile(lang, options)
     end
   end
   
+  def self.save_profile(lang, options = {})
+    dir = options[:dir] || PROFILE_DIR
+    profile = Babel.profile(lang)
+    profile.limit(options[:limit]) if options[:limit]
+    puts "saving profile to #{file_name(dir, lang)}"
+    File.open(file_name(dir, lang), 'wb') do |file|
+      file.write(profile.ya2yaml)
+    end
+  end  
+
   private
   
   # Build the file name for a profile file

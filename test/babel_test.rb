@@ -21,7 +21,6 @@ class BabelTest < Test::Unit::TestCase
     bar fr
     bar sp
     
-#    Babel.save_profiles()
   end
   
   

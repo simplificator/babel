@@ -23,16 +23,16 @@ module Babel
     # TODO: needed?
     def clean(text)
       return text
-      text = text.gsub('?', '')
-      text = text.gsub('.', '')
-      text = text.gsub(';', '')
+      text = text.gsub(/[0-9]/, '')
       text = text.gsub(':', '')
+      text = text.gsub('/', '')
+      text = text.gsub('_', '')
       text = text.gsub('(', '')
       text = text.gsub(')', '')
-      text = text.gsub('/', '')
-      text = text.gsub(/[0-9]*/, '')
-      text = text.gsub('+', '')
-      text
+      text = text.gsub(';', '')
+      text = text.gsub('?', '')
+      
+      return text
     end
     
     # limit this profile to n items
@@ -47,18 +47,18 @@ module Babel
     # rank the current profile
     # ngrams are sorted by occurence and then ranked
     def rank
-      @profile.values.sort do |o1, o2|
-        o2.first <=> o1.first
-      end.each_with_index do |item, index|
-        item[1] = index + 1
-      end
+      #@profile.values.sort do |o1, o2|
+      #  o2.first <=> o1.first
+      #end.each_with_index do |item, index|
+      #  item[1] = index + 1
+      #end
       
       @profile.values.each do |value|
         value[1] = value[0] / @total_occurences.to_f
       end
     end
     
-    # Called when a ngram is occured, optional you can pass an
+    # Called when a n-gram is occured, optional you can pass an
     # amount (how many times the ngram occured)
     def occured(ngram, amount = 1)
       (@profile[ngram] ||= [0, 0])[0] += amount

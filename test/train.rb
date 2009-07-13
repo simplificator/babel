@@ -15,7 +15,7 @@ class TrainTest < Test::Unit::TestCase
           Babel.learn($1, line)
          end
        end
-       Babel.save_profiles(:limit => 300)
+       Babel.save_profiles#(:limit => 300)
        Babel.clear_profiles
      end
     end

@@ -4,37 +4,41 @@ class BabelTest < Test::Unit::TestCase
   
   
   should 'Build the profile' do
-    en = "Rainy sunday afternoon next week on monday"
-    de = 'Regnerischer Sonntag'
+    en = "Rainy sunday afternoon next week on monday."
+    de = 'Regnerischer Sonntag. Ich werde essen gehen'
     fr = 'Je ne regrette rien'
     
     en1 = "It won't be long"
     de1 = "Tief im westen"
-    fr1 = 'Allez led bleu'
+    fr1 = 'Allez les bleu'
     
     
     Babel.load_profiles
-    File.open(File.dirname(__FILE__) + '/../lib/data/en.txt') do |file|
-#      Babel.learn('en', file.read)
-    end
-    File.open(File.dirname(__FILE__) + '/../lib/data/de.txt') do |file|
-#      Babel.learn('de', file.read)
-    end
+
+    foo en
+    foo de
+    foo fr
+    foo "rainy afternoon"
     
-    File.open(File.dirname(__FILE__) + '/../lib/data/fr.txt') do |file|
-#      Babel.learn('fr', file.read)
-    end
+    bar en
+    bar de
+    bar fr
     
-    en.language = 'en'
-    de.language = 'de'
-    fr.language = 'fr'
-    puts en.language
-    puts de.language
-    puts fr.language
-    puts "rainy afternoon".language
-    puts Babel.distances("why so sad").inspect
-    puts Babel.distances(de).inspect
-    puts Babel.distances(fr).inspect
+    #puts Babel.distances("why so sad").inspect
+    #puts Babel.distances(de).inspect
+    #puts Babel.distances(fr).inspect
 #    Babel.save_profiles()
   end
+  
+  
+  
+  
+  def foo(s)
+    puts "i think '#{s}' is #{s.language}"
+  end
+  
+  def bar(s)
+    puts "Distances for '#{s}': \n#{Babel.distances(s).inspect}"
+  end
+  
 end

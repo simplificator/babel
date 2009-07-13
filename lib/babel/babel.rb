@@ -1,12 +1,6 @@
 module Babel
-  MAX_DISTANCE_PER_NGRAM = 3
-
   @profiles = {}
-  
-  DEFAULT_FILE_NAME = 'babel_profile.yml'
-  
   PROFILE_DIR = File.join(File.dirname(__FILE__), '..', 'profiles')
-  
   def self.learn(lang, text, options = {})
     lang = lang.to_s
     profile = @profiles[lang] ||= Profile.new()
@@ -14,7 +8,9 @@ module Babel
   end
 
 
-  
+  def self.clear_profiles
+    @profiles = {}
+  end
   
   def self.guess(source, options = {})
     found = nil
@@ -40,8 +36,8 @@ module Babel
   def self.load_profiles(options = {})
     dir = options[:directory] || PROFILE_DIR
     Dir[File.join(PROFILE_DIR, '*.yml')].each do |file|
-      lang =File.basename(file)[-6..-5]
-      @profiles[lang] = YAML.load_file(file)
+      file =~ /profile_(.+)\.yml/
+      @profiles[$1] = YAML.load_file(file)
     end
   end
   

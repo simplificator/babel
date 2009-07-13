@@ -4,7 +4,9 @@ class String
   def ngrams(options = {})
     min_length = options[:min_length] || 1
     max_length = options[:max_length] || self.length
+    pad = options[:pad] || false
     value = options[:preserve_case] ? self : self.downcase
+    value = "_#{value}#{'_' * (value.length - 1)}" if pad
     res = []
     # TODO: use min/max length for loop index instead of looping
     # all and then use if test to decide if to add or not
@@ -17,6 +19,14 @@ class String
     end
     res  
   end
+  
+  # def byte_grams(options = {})
+  #   min_length = options[:min_length] || 1
+  #   max_length = options[:max_length] || self.length
+  #   value = options[:preserve_case] ? self : self.downcase
+  #   res = []
+  #   
+  # end
   
   
   # Ask Babel about the language of this text

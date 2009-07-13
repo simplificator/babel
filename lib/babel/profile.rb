@@ -1,14 +1,12 @@
 module Babel
   class Profile
-    
-    MAX_DISTANCE_PER_NGRAM = 10000000
     def initialize()
       @profile = {}
       @total_occurences = 0
     end
     
     def learn(text, options = {})
-      options = {:min_length => 2, :max_length => 15}.merge(options)
+      options = {:min_length => 2, :max_length => 5, :pad => true}.merge(options)
       text = clean(text)
       text.split(' ').each do |word|
         ngrams = word.ngrams(options)
@@ -21,6 +19,7 @@ module Babel
     end
     
     
+    # TODO: needed?
     def clean(text)
       return text
       text = text.gsub('?', '')
@@ -79,7 +78,11 @@ module Babel
     def distance(other)
       @profile.inject(0) do |memo, item|
         other_ranking = other.ranking(item.first)
-        memo += [(other_ranking - item.last.last).abs, MAX_DISTANCE_PER_NGRAM].min
+        if other_ranking == 0
+          memo += 1
+        else
+          memo += (other_ranking - item.last.last).abs
+        end
       end
     end
     

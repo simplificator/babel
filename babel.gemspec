@@ -30,11 +30,11 @@ Gem::Specification.new do |s|
      "lib/profiles/profile_ita.yml",
      "lib/profiles/profile_spa.yml",
      "lib/profiles/udhr_txt.zip",
+     "samples/guessing.rb",
      "test/babel_test.rb",
      "test/profile_test.rb",
      "test/string_extensions_test.rb",
-     "test/test_helper.rb",
-     "test/train.rb"
+     "test/test_helper.rb"
   ]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/simplificator/babel}
@@ -46,8 +46,7 @@ Gem::Specification.new do |s|
     "test/babel_test.rb",
      "test/profile_test.rb",
      "test/string_extensions_test.rb",
-     "test/test_helper.rb",
-     "test/train.rb"
+     "test/test_helper.rb"
   ]
 
   if s.respond_to? :specification_version then

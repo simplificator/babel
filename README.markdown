@@ -28,11 +28,14 @@ The profiles that are shipped with babel are based on the texts found at
 http://www.unicode.org/udhr/index_by_code.html
 
 ##generating profiles
-Profiles can be generated with the data found in _data/udhr_text.zip_ or with any other text.
-You can download the latest version of training data from http://www.unicode.org/udhr/assemblies/udhr_txt.zip
+Profiles can be generated with the data found in http://www.unicode.org/udhr/assemblies/udhr_txt.zip or with any other text.
 Once a profile is generated, Babel can store it in YAML format and load it again from YAML.
 
+there is a rake task which simplifies profile generation:
+   rake babel:build_profile lang=foo file=myfile.txt dir=destination-directory
 
+the file which is generated from this command can be loaded by 
+   Babel.load_profile 'profile_foo.yml'
 
 ##Copyright
 

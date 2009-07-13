@@ -1,11 +1,19 @@
 module Babel
   class Profile
-    def initialize()
-      @profile = {}
+    attr_reader :language
+    attr_reader :data
+    def initialize(language = nil)
+      @data = {}
       @total_occurences = 0
+      @language = language
     end
     
-    #
+    
+    # learn a text
+    # following options are used when generating the n-grams:
+    #  * min_length => 2
+    #  * max_length => 5
+    #  * pad => true
     def learn(text, options = {})
       options = {:min_length => 2, :max_length => 5, :pad => true}.merge(options)
       text = clean(text)
@@ -19,6 +27,15 @@ module Babel
       self # return self so we can chain learn commans. profile.learn('asasas').learn('asdsad')
     end
     
+    
+    def merge(other)
+      if self.language != other.language
+        raise ArgumentError.new("self has a language of #{self.language} but profile to merge has #{other.language}")
+      end
+      other.data.each do |key, value|
+        self.occured(key, value.first)
+      end
+    end
     
     # TODO: needed?
     def clean(text)
@@ -38,7 +55,7 @@ module Babel
     # limit this profile to n items
     # profile needs to be ranked first
     def limit(boundary = 100)
-      @profile.reject! do |key, value|
+      @data.reject! do |key, value|
         raise 'Please call rank() first' if value.last == 0
         boundary < value.last
       end
@@ -47,13 +64,13 @@ module Babel
     # rank the current profile
     # ngrams are sorted by occurence and then ranked
     def rank
-      #@profile.values.sort do |o1, o2|
+      #@data.values.sort do |o1, o2|
       #  o2.first <=> o1.first
       #end.each_with_index do |item, index|
       #  item[1] = index + 1
       #end
       
-      @profile.values.each do |value|
+      @data.values.each do |value|
         value[1] = value[0] / @total_occurences.to_f
       end
     end
@@ -61,23 +78,23 @@ module Babel
     # Called when a n-gram is occured, optional you can pass an
     # amount (how many times the ngram occured)
     def occured(ngram, amount = 1)
-      (@profile[ngram] ||= [0, 0])[0] += amount
+      (@data[ngram] ||= [0, 0])[0] += amount
       @total_occurences += amount
     end
     
     # find the occurence of a ngram. if it never occured, returns 0
     def occurence(ngram)
-      @profile[ngram] ? @profile[ngram].first : 0
+      @data[ngram] ? @data[ngram].first : 0
     end
     
     # find the ranking of a ngram. if it is not yet ranked, return 0
     def ranking(ngram)
-      @profile[ngram] ? @profile[ngram].last : 0
+      @data[ngram] ? @data[ngram].last : 0
     end  
     
     # Calculate the distance to another profile
     def distance(other)
-      @profile.inject(0) do |memo, item|
+      @data.inject(0) do |memo, item|
         other_ranking = other.ranking(item.first)
         if other_ranking == 0
           memo += 1
@@ -89,7 +106,7 @@ module Babel
     
       
     def to_s
-      @profile.inspect
+      @data.inspect
     end
   end
 end

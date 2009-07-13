@@ -3,5 +3,4 @@
 coverage
 rdoc
 pkg
-lib/data/*.txt
-lib/data/*.xml
+lib/data/**

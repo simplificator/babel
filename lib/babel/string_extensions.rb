@@ -30,6 +30,13 @@ class String
   def language(options = {})
     Babel.guess(self, options)
   end
+  # Ask Bable about the languages this text could be.
+  # It will return all the registered languages with the most probable
+  # Language first. You might want to restrict this before presenting to 
+  # the user.
+  def languages(options = {})
+    Babel.distances(self, options).map() {|item| item.first}
+  end
   
   # Tell Babel that this text is in a given language.
   # Convenience method, just calls Babel.learn().

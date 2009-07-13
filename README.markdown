@@ -1,18 +1,38 @@
 #babel
 
 Babel is a gem to identify in what language a text is written.
-It is based on the n-gram approach by Cacnar and Trenkle as described 
+It is based on the n-gram approach by Cavnar and Trenkle as described 
 in http://www.sfs.uni-tuebingen.de/iscl/Theses/kranig.pdf
 
 
 ##usage
-
+    require 'rubygems'
+    require 'babel'
+    
+    def guess_language(s)
+      puts "'#{s}' is probably '#{s.language}'"
+    end
+    # load the default profiles
+    Babel.load_profiles
+    
+    # Let's see what Babel thinks about these texts
+    guess_language 'Montags ist es ruhig'
+    guess_language 'le coq est mort'
+    
+    # Replace a profile with my own profile
+    Babel.load_profile('eng', '/path/to/my/english/profile.yml')
+    
+    # Merge profile data
+    Babel.load_profile('eng', '/path/to/my/other/english/profile.yml', :merge => true)
+    
+    # Show Top-3 Languages for a sentence
+    puts "What language could this be written in?".languages[0..2]
 
 ##profiles
 Profiles are collections of n-grams and the number of occurence of each ngram.
-Babel uses n-grams with length 2-5 (bigram, trigram, tetragram, pentagram) and limits the profile 
-to the top 300 n-grams with the built in profiles. You can create your own profile and decide 
-what n-grams to use and whether you want to limit or not.
+Babel uses n-grams with length 2-5 (bigram, trigram, tetragram, pentagram).
+You can create your own profile and decide what n-grams to use and whether 
+you want to limit or not if you want to.
 
 These profiles are shipped with the gem: 
  * german (deu) (this profile is built from udhr_deu_1996.txt)
@@ -35,7 +55,7 @@ there is a rake task which simplifies profile generation:
    rake babel:build_profile lang=foo file=myfile.txt dir=destination-directory
 
 the file which is generated from this command can be loaded by 
-   Babel.load_profile 'profile_foo.yml'
+   Babel.load_profile 'foo', 'profile_foo.yml'
 
 ##Copyright
 

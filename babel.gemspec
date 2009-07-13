@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{babel}
-  s.version = "0.0.5"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["simplificator"]
@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
      "lib/profiles/profile_fra.yml",
      "lib/profiles/profile_ita.yml",
      "lib/profiles/profile_spa.yml",
+     "lib/profiles/udhr_txt.zip",
      "test/babel_test.rb",
      "test/profile_test.rb",
      "test/string_extensions_test.rb",

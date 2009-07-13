@@ -35,6 +35,6 @@ class BabelTest < Test::Unit::TestCase
     puts Babel.distances("why so sad").inspect
     puts Babel.distances(de).inspect
     puts Babel.distances(fr).inspect
-    #Babel.save_profiles()
+#    Babel.save_profiles()
   end
 end

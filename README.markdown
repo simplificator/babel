@@ -4,7 +4,10 @@ Babel is a gem to identify in what language a text is written.
 It is based on the n-gram approach by Cavnar and Trenkle as described 
 in http://www.sfs.uni-tuebingen.de/iscl/Theses/kranig.pdf
 
-
+##installation
+    gem sources -a http://gems.github.com
+    git install simplificator-babel
+    
 ##usage
     require 'rubygems'
     require 'babel'
@@ -35,11 +38,11 @@ You can create your own profile and decide what n-grams to use and whether
 you want to limit or not if you want to.
 
 These profiles are shipped with the gem: 
- * german (deu) (this profile is built from udhr_deu_1996.txt)
- * english (eng)
- * french (fra)
- * spanish (spa)
- * italian (ita)
+*   german (deu) (this profile is built from udhr_deu_1996.txt)
+*   english (eng)
+*   french (fra)
+*   spanish (spa)
+*   italian (ita)
  
 Want another profile built in? Send an email to info@simplificator.com and if there are enough 
 requests we add the profile.
@@ -52,10 +55,12 @@ Profiles can be generated with the data found in http://www.unicode.org/udhr/ass
 Once a profile is generated, Babel can store it in YAML format and load it again from YAML.
 
 there is a rake task which simplifies profile generation:
-   rake babel:build_profile lang=foo file=myfile.txt dir=destination-directory
+
+    rake babel:build_profile lang=foo file=myfile.txt dir=destination-directory
 
 the file which is generated from this command can be loaded by 
-   Babel.load_profile 'foo', 'profile_foo.yml'
+    
+    Babel.load_profile 'foo', 'profile_foo.yml'
 
 ##Copyright
 

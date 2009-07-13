@@ -38,11 +38,11 @@ You can create your own profile and decide what n-grams to use and whether
 you want to limit or not if you want to.
 
 These profiles are shipped with the gem: 
-*   german (deu) (this profile is built from udhr_deu_1996.txt)
-*   english (eng)
-*   french (fra)
-*   spanish (spa)
-*   italian (ita)
+ *   german (deu) (this profile is built from udhr_deu_1996.txt)
+ *   english (eng)
+ *   french (fra)
+ *   spanish (spa)
+ *   italian (ita)
  
 Want another profile built in? Send an email to info@simplificator.com and if there are enough 
 requests we add the profile.

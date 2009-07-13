@@ -56,11 +56,15 @@ module Babel
   def self.load_profiles(options = {})
     dir = options[:directory] || PROFILE_DIR
     Dir[File.join(PROFILE_DIR, '*.yml')].each do |file|
-      file =~ /profile_(.+)\.yml/
-      @profiles[$1] = YAML.load_file(file)
+      Babel.load_profile(file)
     end
   end
   
+  # Load a single profile
+  def self.load_profile(file)
+    file =~ /profile_(.+)\.yml/
+    @profiles[$1] = YAML.load_file(file)
+  end
   # Save the profiles to a specifified directory.
   #
   # options are:

@@ -81,12 +81,12 @@ namespace :babel do
       file = ENV['file']
       dir = ENV['dir'] || File.dirname(__FILE__)
       skip = ENV['skip']
-      limit = ENV['limit']
+      limit = Integer(ENV['limit']) if ENV['limit']
       unless file
         skip ||= 5 # skip header in data files. english all the time
         file = File.join(File.dirname(__FILE__), 'lib', 'data', "udhr_#{lang}.txt")
       end
-      puts "Learning about #{lang} from #{file} and save it to #{dir}"
+      puts "Learning about '#{lang}' from #{file} and save it to #{dir}"
       File.open(file, 'r') do |f|
         f.each_with_index do |line, index|
           if index > skip 
@@ -98,5 +98,23 @@ namespace :babel do
     end
   end
   
+  
+  task :build_profiles do
+    limit = 6500
+    skip = 5
+    ['deu', 'eng', 'spa', 'fra', 'ita'].each do |lang|
+        file = "lib/data/udhr_#{lang}.txt"
+        puts "Learning about '#{lang}' from #{file}"
+        File.open(file, 'r') do |f|
+          f.each_with_index do |line, index|
+            if index > skip 
+             Babel.learn(lang, line)
+            end
+          end
+        end
+        puts "learned #{Babel.profile(lang).data.size} ngrams"
+        Babel.save_profile(lang, :dir => 'lib/profiles', :limit => limit)
+    end
+  end
 end
 

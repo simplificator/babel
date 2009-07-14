@@ -62,6 +62,8 @@ there is a rake task which simplifies profile generation:
 the file which is generated from this command can be loaded by 
     
     Babel.load_profile 'foo', 'profile_foo.yml'
+##problems
+I don't know how well this plays with asian languages
 
 ##Copyright
 

@@ -9,20 +9,15 @@ def show_languages(s)
   puts "Possible Languages for '#{s}': \n#{s.languages[0..2].join(', ')}"
 end
  
-en = "Rainy sunday"
+en = 'Rainy sunday'
 de = 'Regnerischer Sonntag'
 fr = 'Je ne regrette rien'
 sp = 'yo no soy un marinero'
 
-texts = [en, de, fr, sp]    
+texts = [en, de, fr, sp, 'lago di como']    
 Babel.load_profiles
 
 texts.each do |text|
   guess_language text
   show_languages text
-end  
-  
-  
-  
-
-  
+end

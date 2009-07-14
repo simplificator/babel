@@ -60,7 +60,6 @@ module Babel
     source = Profile.new.learn(text, options)
     @profiles.map { |lang, target| [lang, source.distance(target)] }.sort {|o1, o2| o1.last <=> o2.last}
   end
-  
 
   # Load all the profiles from a given directory.
   # Loads all .yml files so be careful what directory you specify.

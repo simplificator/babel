@@ -17,7 +17,8 @@ class String
     0.upto(value.length - 1) do |index|
       index.upto(value.length - 1) do |len|
         if value[index..len].length >= min_length && value[index..len].length <= max_length
-            res << value[index..len] 
+          ngram = value[index..len]
+          res << ngram unless ngram.count('_') == ngram.size 
         end
       end
     end

@@ -30,13 +30,13 @@ class ProfileTest < Test::Unit::TestCase
     profile.occured('c', 5)
     profile.occured('d', 3)
     
-    profile.rank
+    profile.weigh_and_rank
     
-    assert_equal 1, profile.ranking('a')
-    assert_equal 2, profile.ranking('b')
-    assert_equal 3, profile.ranking('c')
-    assert_equal 4, profile.ranking('d')
-    assert_equal 5, profile.ranking('e')
+    assert_equal 1, profile.rank('a')
+    assert_equal 2, profile.rank('b')
+    assert_equal 3, profile.rank('c')
+    assert_equal 4, profile.rank('d')
+    assert_equal 5, profile.rank('e')
   end
   
   should 'limit' do
@@ -47,7 +47,7 @@ class ProfileTest < Test::Unit::TestCase
     profile.occured('d', 3)
     profile.occured('e', 1)
     
-    profile.rank
+    profile.weigh_and_rank
     profile.limit(3)
     
     assert_equal 10, profile.occurence('a')
@@ -58,11 +58,13 @@ class ProfileTest < Test::Unit::TestCase
   end
   
   should 'find the distance to another profile' do
+    # distance is based on weigh_and_rank which is a floating point number
+    # hard to test. just make some comparisons with <>
     a = Profile.new
     b = Profile.new
     
     a.occured('a')
-    a.rank # always rank when finished with occured(). distance is baed on rank
+    a.weigh_and_rank # always rank when finished with occured(). distance is baed on rank
 
     assert_equal 0, a.distance(a), 'distance to self is 0'
     assert_equal 1, a.distance(b)
@@ -70,7 +72,7 @@ class ProfileTest < Test::Unit::TestCase
     assert_equal 0, b.distance(b)
     
     b.occured('a')
-    b.rank
+    b.weigh_and_rank
 
     assert_equal 0, a.distance(a)
     assert_equal 0, a.distance(b)
@@ -79,15 +81,14 @@ class ProfileTest < Test::Unit::TestCase
     
     a.occured('b')
     a.occured('c')
-    a.rank
+    a.weigh_and_rank
 
-    assert_equal 5, a.distance(b)
+    assert  2 < a.distance(b)
     
     a.occured('d')
-    a.rank
-    
-    # rank 4 is limited to 3 -> 8 = 2 + 3 + [4, 3].min
-    assert_equal 8, a.distance(b)
+    a.weigh_and_rank
+   
+    assert 3 < a.distance(b)
   end
   
   should 'learn a text' do
@@ -100,6 +101,16 @@ class ProfileTest < Test::Unit::TestCase
     assert_equal 2, profile.occurence('me')
     assert_equal 1, profile.occurence('mem')
     assert_equal 1, profile.occurence('meme')
+  end
+  
+  should 'clean a text' do
+    profile = Profile.new
+    assert_equal '', profile.clean_text('')
+    assert_equal ' ', profile.clean_text('  ')
+    assert_equal ' ', profile.clean_text('   ')
+    assert_equal 'hallo', profile.clean_text('1h2a3l4l5o')
+    assert_equal 'no braces and brackets and curly braces', profile.clean_text('(no ({braces) [] and brackets} and curly braces[]')
+    
   end
   
 end
